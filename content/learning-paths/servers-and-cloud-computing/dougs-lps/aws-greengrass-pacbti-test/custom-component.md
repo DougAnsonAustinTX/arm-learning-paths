@@ -26,11 +26,14 @@ In this section, lets create a custom AWS IoT Greengrass component that will use
 
 4). Record the name of the bucket you created. You will need it in the next step when editing some YAML. 
 
-6). Download/Save this artifact to your desktop:
+6). On your localhost, clone this asset repo:
 
+```bash
+git clone https://github.com/DougAnsonAustinTx/pac-bti-gg-assets 
+cd ./pac-bti-gg-assets
+```
 
-
-5). Press "Upload" to upload your saved artifact to your s3 bucket:
+5). In the browser S3 dashboard, press "Upload" to upload your this artifact, from your cloned repo, to your s3 bucket: ./arm-pac-bti-greengrass-demo-mqtt-trigger.zip
 
 ![Upload to an S3 bucket](images/upload-1.png "Uploading to our S3 bucket")
 
