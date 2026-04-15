@@ -8,9 +8,9 @@ layout: learningpathall
 
 ### Overview
 
-In this section, you'll create/launch the Azure Portal to create a virtual machine with the x64 processor. 
+In this section, you'll use the Azure portal to create a virtual machine with an x64 processor architecture.
 
-This VM will act as our simulated "on-prem" x64 MySQL server.
+This VM acts as your simulated on-premises x64 MySQL server.
 
 ### Create an Azure x64 virtual machine
 
@@ -28,7 +28,7 @@ To create an Azure virtual machine:
 - For **Authentication type**, select **SSH public key**.
 
 {{% notice Note %}}
-Azure generates an SSH key pair for you and lets you save it for future use. This method is fast, secure, and easy for connecting to your virtual machine.
+Azure can generate an SSH key pair for you and lets you save it for future use.
 {{% /notice %}}
 
 - Fill in the **Administrator username** for your VM.
@@ -59,6 +59,6 @@ Your virtual machine should be ready and running in a few minutes. You can SSH i
 
 ## What you've learned and what's next
 
-You've created an Azure x64 virtual machine running Ubuntu 24.04 LTS with SSH authentication configured. The virtual machine is now ready to act as our "on-prem" simulated environment for this learning path.
+You've created an Azure x64 virtual machine running Ubuntu 24.04 LTS with SSH authentication configured. The virtual machine is now ready to act as your simulated on-premises environment for this Learning Path.
 
-Next, you will prepare the "on-prem" virtual environment by installing MySQL and a default database that will be used for the migration. 
+Next, you will prepare this environment by installing MySQL and loading a sample database for migration.

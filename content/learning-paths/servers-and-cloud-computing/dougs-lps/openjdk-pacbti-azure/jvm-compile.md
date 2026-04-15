@@ -6,9 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-### Prerequisites Installation
+### Install build prerequisites
 
-Install these pre-requistes via a SSH shell into your Cobalt 100 VM. Let's also install a "primer" JVM to aid in building out the PAC/BTI enabled JVM:
+Install these prerequisites in an SSH shell on your Cobalt 100 VM. Also install a bootstrap JVM to build the PAC/BTI-enabled JVM:
 
 ```bash
 sudo apt update
@@ -20,7 +20,7 @@ sudo apt install -y openjdk-25-jdk
 
 ### Download the OpenJDK source
 
-Download the OpenJDK. Since our "primer" JVM is v25, lets build the v26 JVM with PAC/BTI enabled: 
+Download OpenJDK. Since the bootstrap JVM is v25, build v26 with PAC/BTI support enabled:
 
 ```bash
 cd $HOME
@@ -31,7 +31,7 @@ git checkout jdk-26+35
 
 ### Configure the OpenJDK source build
 
-Configure the OpenJDK source to build and to include the PAC/BTI instruction support
+Configure the OpenJDK source build and enable branch protection support:
 
 ```bash
 bash configure --enable-branch-protection 
@@ -39,26 +39,26 @@ bash configure --enable-branch-protection
 
 ### Build the JVM
 
-Invoke the build to create the JVM. NOTE: This build process may take over 30 minutes to complete:
+Run the build to create the JVM. This process can take more than 30 minutes:
 
 ```bash
 make images
 ```
 
-### Register the JVM with the Cobalt VM:
+### Register the JVM with the system
 
-Invoke the following commands to register the newly created JDK/JVM with the system:
+Run the following commands to register the newly created JDK/JVM with the system:
 
 ```bash
 cd $HOME/jdk
-WD=`pwd`/build/linux-aarch64-server-release
+WD=$(pwd)/build/linux-aarch64-server-release
 cd /usr/lib/jvm
 sudo ln -s ${WD}/jdk ./java-26-openjdk-arm64
 sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-26-openjdk-arm64/bin/java 3000
 cd
 ```
 
-Now, confirm the newly installed JVM:
+Confirm the newly installed JVM:
 
 ```bash
 java --version
@@ -72,4 +72,4 @@ OpenJDK Runtime Environment (build 26-internal-adhoc.ubuntu.jdk)
 OpenJDK 64-Bit Server VM (build 26-internal-adhoc.ubuntu.jdk, mixed mode)
 ```
 
-Next, lets run a script to confirm that the PAC/BTI enablement exists in the java VM just created and installed.
+Next, run a script to confirm PAC/BTI readiness in the JVM you just built and installed.

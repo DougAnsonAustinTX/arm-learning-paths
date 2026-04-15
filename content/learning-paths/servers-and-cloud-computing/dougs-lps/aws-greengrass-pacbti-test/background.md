@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ### AWS IoT Greengrass
 
-AWS IoT Greengrass is AWS’s edge runtime and cloud service for building, deploying, and managing software on devices outside the cloud, such as industrial gateways, robots, cameras, and other IoT systems. Its main purpose is to let those devices run applications locally for lower latency, reduced bandwidth use, and continued operation even when connectivity is limited, while still integrating with AWS services. In Greengrass V2, key features include a modular component model for packaging software, support for Lambda functions, containers, native processes, and custom runtimes, secure communication with AWS IoT Core, local messaging and device state handling, fleet deployments and over-the-air updates, optional stream processing, and edge machine learning inference for running cloud-trained models directly on the device.
+AWS IoT Greengrass is an edge runtime and cloud service for building, deploying, and managing software on devices outside the cloud, such as industrial gateways, robots, cameras, and other IoT systems. It lets devices run applications locally for lower latency, reduced bandwidth use, and continued operation when connectivity is limited, while still integrating with AWS services. In Greengrass V2, key features include a modular component model for packaging software, support for Lambda functions, containers, native processes, and custom runtimes, secure communication with AWS IoT Core, local messaging and device state handling, fleet deployments and over-the-air updates, optional stream processing, and edge machine learning inference.
 
 
 ### PAC/BTI Arm v9 instructions
@@ -17,4 +17,4 @@ Armv9 Pointer Authentication (PAC) and Branch Target Identification (BTI) are se
 
 ### What you've learned and what's next
 
-Next, lets make use of AWS IoT Greengrass to create and deploy a custom component to some local Arm-based devices to test/check for that device's PAC/BTI instruction set support. 
+Next, you'll use AWS IoT Greengrass to create and deploy a custom component to local Arm-based devices and verify each device's PAC/BTI support.

@@ -1,5 +1,7 @@
 ---
-title: Lift-n-Shift MySQL from on-prem to Azure Cloud Cobalt 100 VM 
+title: Migrate MySQL from on-premises x64 to Azure Cobalt 100 Arm VMs
+
+description: Learn how to migrate a MySQL database from an on-premises x64 environment to an Arm-based Azure Cobalt 100 VM and validate performance with sysbench.
 
 draft: true
 cascade:
@@ -7,15 +9,16 @@ cascade:
 
 minutes_to_complete: 30   
 
-who_is_this_for: This is an introductory topic about the "Lift-n-Shift" of MySQL from an "on-premise" installation (x86) to the Microsoft Azure Cobalt 100 Arm-based virtual machines. It is designed for developers migrating MySQL from x86_64 on-premise to Arm architecture in the Azure cloud.
+who_is_this_for: This Learning Path is for developers who want to migrate MySQL from an on-premises x64 environment to an Arm-based Azure Cobalt 100 virtual machine.
 
 learning_objectives: 
-    - Provision an Azure Arm-based Cobalt 100 virtual machine using a Terraform script and the Azure CLI, with Ubuntu Pro 24.04 LTS as the base image
-    - On the "on-premise" host, performing the actual manual "lift-n-shift" of a sysbench-based MySQL database to the Cobalt 100 VM. 
-    - Perform sysbench testing and comparative benchmarking between the on-premise host and the Arm64 Cobalt 100 virtual machine
+    - Provision an Arm-based Azure Cobalt 100 virtual machine by using Terraform and Azure CLI.
+    - Export and restore a MySQL database from an on-premises x64 simulator into the Arm VM.
+    - Run sysbench on the migrated database and interpret key performance metrics.
 
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
+    - Basic familiarity with SSH and MySQL command-line tools
 
 
 author: Doug Anson
@@ -31,6 +34,10 @@ armips:
 
 tools_software_languages:
     - MySQL
+    - Terraform
+    - Azure CLI
+    - sysbench
+    - Bash
 
 operatingsystems:
     - Linux
@@ -41,12 +48,12 @@ further_reading:
       link: https://learn.microsoft.com/en-us/azure/virtual-machines/
       type: documentation
   - resource:
-      title: Azure Container Instances documentation
-      link: https://learn.microsoft.com/en-us/azure/container-instances/
+      title: Copying MySQL databases to another machine
+      link: https://dev.mysql.com/doc/refman/8.4/en/copying-databases.html
       type: documentation
   - resource:
-      title: MySQL 
-      link: https://dev.mysql.com/doc/ 
+      title: mysqldump reference
+      link: https://dev.mysql.com/doc/refman/8.4/en/mysqldump.html
       type: documentation
   - resource:
       title: sysbench benchmarking tools for MySQL

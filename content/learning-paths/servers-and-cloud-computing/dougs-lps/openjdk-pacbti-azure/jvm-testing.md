@@ -1,5 +1,5 @@
 ---
-title: Testing the installed/optimized JVM for PAC/BTI enablement
+title: Test the installed JVM for PAC/BTI enablement
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -22,7 +22,7 @@ chmod 755 ./test-pacbti.sh
 Run the test script to confirm PAC/BTI enablement:
 
 ```bash
-$HOME/test-pacbti.sh --java /usr/bin/java
+./test-pacbti.sh --java /usr/bin/java
 ```
 
 Output should resemble:
@@ -55,8 +55,8 @@ Interpretation:
   BTI is likely enabled in the runtime binaries.
 ```
 
-### What we have learned
+### What you've learned
 
-By default, some OpenJDK JVMs are not published with PAC/BTI enabled.  This is primarily due to the number of older arm architectures running in the wild.  Over time, this will change though. If needed though, it's simple to create a private instance of a JVM that is built with PAC/BTI and registered with the underlying operating system.
+Some OpenJDK builds are not distributed with PAC/BTI enabled by default because they must remain compatible with older Arm platforms. When you need these protections, you can build and register your own JVM with branch protection support.
 
-Using JVMs that have the PAC/BTI features enabled, when run on platforms that support PAC/BTI, provide added safety and protection for Java-based workloads running in the JVM.
+When a PAC/BTI-enabled JVM runs on a platform that supports these features, Java workloads gain additional control-flow protection.

@@ -1,5 +1,5 @@
 ---
-title: Overview of Azure Cobalt 100 VM and MySQL Migrations
+title: Understand Azure Cobalt 100 VMs and MySQL migration strategy
 
 weight: 2
 
@@ -14,11 +14,13 @@ To learn more, see the Microsoft blog [Announcing the preview of new Azure VMs b
 
 ### MySQL Migrations
 
-MySQL is a cross-platform relational database system whose storage engines and on-disk formats are designed for reliability and portability, but when moving between different CPU architectures such as x64 to Arm, Oracle’s MySQL documentation recommends a logical migration rather than copying raw data files directly: use mysqldump to export the database as SQL, transfer the dump to the Arm server, and import it with the mysql client on the target system. In the MySQL 8.4 Reference Manual, the “Copying MySQL Databases to Another Machine” section explicitly says that for transfers between different architectures, use mysqldump to create SQL statements and then load them on the other machine, while the mysqldump documentation notes that the utility is intended for backup or transfer to another SQL server. For Linux installs, MySQL also recommends using Oracle-provided distributions/packages for the destination host so the Arm server is running a supported build before the import.
+MySQL is a cross-platform relational database system whose storage engines and on-disk formats are designed for reliability and portability. When you move between CPU architectures, such as x64 to Arm, MySQL documentation recommends a logical migration instead of copying raw data files.
+
+A practical approach is to use `mysqldump` to export SQL, transfer the dump, and import it on the Arm target with the `mysql` client. The MySQL 8.4 Reference Manual also recommends this approach for cross-architecture transfers.
 
 
 ## What you've learned and what's next
 
-Now that you have the background on the Azure Cobalt 100 processor, MySQL and MySQL's "lift-n-shift" recommendations from migrating a MySQL database from an X64 server to an ARM server, we'll utilize Terraform and bash scripting to "lift-n-shift" an example database from an "on-prem" instance that you have setup into an Azure Neoverse VM running MySQL.
+You now have the background on Azure Cobalt 100 and the recommended MySQL migration method for x64-to-Arm moves.
 
-Next, we'll create our simulated "on-prem" x64 server, as an Azure VM for sake of example, and prep the VM to become our "on-prem" environment.
+Next, you'll create a simulated on-premises x64 server in Azure and prepare it as the migration source environment.

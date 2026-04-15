@@ -36,7 +36,7 @@ Creating a virtual machine based on Azure Cobalt 100 is no different from creati
 - For **Authentication type**, select **SSH public key**.
 
 {{% notice Note %}}
-Azure generates an SSH key pair for you and lets you save it for future use. This method is fast, secure, and easy for connecting to your virtual machine.
+Azure can generate an SSH key pair for you and lets you save it for future use.
 {{% /notice %}}
 
 - Fill in the **Administrator username** for your VM.
@@ -67,6 +67,6 @@ Your virtual machine should be ready and running in a few minutes. You can SSH i
 
 ## What you've learned and what's next
 
-You've created an Azure Cobalt 100 Arm64 virtual machine running Ubuntu 24.04 LTS with SSH authentication configured. The virtual machine is now ready for compiling, installing and running Java workloads with OpenJDK optimized with PAC/BTI enablement.
+You've created an Azure Cobalt 100 Arm64 virtual machine running Ubuntu 24.04 LTS with SSH authentication configured. The virtual machine is now ready for compiling and installing OpenJDK with PAC/BTI support.
 
-Next, you'll install the OpenJDK source on the VM and begin compiling the source into a JVM runtime. Then, the JVM runtime will be installed and registered in the VM as the primary "JVM" for the VM. Finally, simple tests can be run against the JVM runtime to confirm that PAC/BTI support is enabled for the JVM. 
+Next, you'll download and compile OpenJDK on the VM, register the resulting JVM runtime, and run validation checks for PAC/BTI support.

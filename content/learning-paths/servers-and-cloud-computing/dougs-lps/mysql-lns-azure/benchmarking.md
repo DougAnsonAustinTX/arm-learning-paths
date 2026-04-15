@@ -8,26 +8,26 @@ layout: "learningpathall"
 
 ### Introduction
 
-In this section, we'll run sysbench on our Azure Cloud MySQL instance to examine performance of the VM. We'll use the database that we migrated to the Azure Cloud instance for the basis of the benchmark. 
+In this section, you'll run sysbench on the Arm-based Azure MySQL instance and review core performance metrics.
 
 
 ### Preparing to run the benchmark
 
-Open **one SSH shell** into your "on-prem" instance replacing YOUR_RSA_FILENAME and YOUR_ONPREM_IP_ADDRESS from what you saved in the previous section:
+From your local machine, open an SSH shell to the on-premises simulator by replacing `YOUR_RSA_FILENAME` and `YOUR_ONPREM_IP_ADDRESS`:
 
 ```bash
 ssh -i $HOME/.ssh/YOUR_RSA_FILENAME azureadmin@YOUR_ONPREM_IP_ADDRESS
 ```
 
-Within the "on-prem" SSH shell, examine $HOME/.ssh for another "*rsa" file. Noting the name of that file and your Azure Cloud public IP address, open a shell from the "on-prem" shell into the Azure Cloud VM:
+From that on-premises shell, identify the SSH key in `$HOME/.ssh` used for the Azure VM. Then connect to the Arm-based Azure VM:
 
 ```bash
 ssh -i $HOME/.ssh/AZURE_CLOUD_RSA_FILENAME azureadmin@YOUR_ARM_BASED_VM_PUBLIC_IP_ADDRESS
 ```
 
-You should now have a SSH shell into your Arm-based Azure Cloud VM instance. 
+You should now have an SSH shell into your Arm-based Azure VM.
 
-Next, copy and save the following file as "run.sh" in the shell:
+Next, create a file named `run.sh` with the following content:
 
 ```bash
 #!/bin/bash
@@ -61,13 +61,13 @@ shift 3
 main $*
 ```
 
-Ensure that your script has execute privileges:
+Make the script executable:
 
 ```bash
 sudo chmod 755 ./run.sh
 ```
 
-Also, within the shell, record the MySQL "admin" password for your Arm-based VM:
+In the same shell, retrieve the MySQL root password file used by the migration script:
 
 ```bash
 sudo su - 
@@ -76,45 +76,52 @@ cat /root/mysql_root_password.txt
 
 ### Running the benchmark
 
-In the shell execute the run.sh script replacing AZURE_CLOUD_MYSQL_ADMIN_PW with the password from above (i.e. from cat /root/mysql_root_password.txt):
+Run `run.sh`, replacing `AZURE_CLOUD_MYSQL_ADMIN_PW` with the password value you just retrieved:
 
 ```bash
 ./run.sh admin AZURE_CLOUD_MYSQL_ADMIN_PW cobalt_100_arm64
 ```
 
-The script will provide 5 output "perf" files that detail the performance of the sysbench "oltp_read_write" benchmark. 
+The script creates five `.perf` files with sysbench `oltp_read_write` results at different thread counts.
 
 ### Interpreting the results
 
-First, lets download the 5 "perf" benchmark files from the Azure VM.  From within the "on-prem" shell, type this replacing AZURE_CLOUD_RSA_FILENAME with the "rsa" file you found in your on-prem's home ssh directory (i.e. $HOME/.ssh) and YOUR_ARM_BASED_VM_PUBLIC_IP_ADDRESS with the public IP address of your Azure Arm64 VM:
+First, download the five `.perf` files from the Azure VM to your on-premises simulator shell. Replace `AZURE_CLOUD_RSA_FILENAME` and `YOUR_ARM_BASED_VM_PUBLIC_IP_ADDRESS`:
 
 ```bash
 cd $HOME
 scp -i $HOME/.ssh/AZURE_CLOUD_RSA_FILENAME azureadmin@YOUR_ARM_BASED_VM_PUBLIC_IP_ADDRESS:*.perf .
 ```
 
-Next, on your local host, type the following replacing ON_PREM_RSA_FILENAME with the "rsa" file you downloaded when you created the "on-prem" VM and YOUR_ON_PREM_SIM_IP_ADDRESS with the public IP address of your "on-prem" VM:
+Next, from your local machine, copy those files from the on-premises simulator to your local host. Replace `ON_PREM_RSA_FILENAME` and `YOUR_ON_PREM_SIM_IP_ADDRESS`:
 
 ```bash
 cd $HOME
 scp -i $HOME/.ssh/ON_PREM_RSA_FILENAME azureuser@YOUR_ON_PREM_SIM_IP_ADDRESS:*.perf .
 ```
 
-You should now have 5 "perf" files on your local host. These files can be used to investigate the perforance of your current Arm64 Azure Cloud VM. 
+You should now have five `.perf` files on your local host.
 
-As an example, you can use ChatGPT to interpet and summarize the results by uploading all 5 perf files to ChatGPT and provide it with the following prompt:
+To summarize key metrics quickly, run:
 
-```text
-Please create a nice 1 page PDF summary of the performance results of the oltp_read_write sysbench benchmark running on E4pds_v6 Arm64 Azure VM . Supply tables, findings, and summaries in the PDF as a nice easy to read 1 pager.
+```bash
+for f in *.perf; do
+  echo "== $f =="
+  grep -E "threads:|transactions:|queries:|95th percentile:" "$f"
+  echo
+done
 ```
 
-ChatGPT will produce a nice summary to view your Arm64-based Cobalt 100 Azure Cloud VM's MySQL performance:
+Use these values to compare throughput and latency across thread counts:
+
+- Higher `transactions:` values indicate better throughput.
+- Lower `95th percentile:` values indicate better tail latency.
+- Look for where adding threads no longer increases throughput meaningfully.
+
+The following example image shows benchmark output from this workflow:
 
 ![Azure Cobalt 100 Arm64 E4pds_v6 sysbench results#center](images/benchmark.png "Azure Cobalt 100 Arm64 E4pds_v6 sysbench results")
 
 ### What we learned
 
-We learned how to:
-- Utilize Terraform scripting to create an Arm-based Azure Cloud VM and "lift-n-shift" a MySQL database into that VM from a simulated x64 "on-prem" MySQL server. 
-- Utilize sysbench, on the Arm-based Azure Cloud VM, to gauge the performance of the VM with the MySQL database.
-- Utilize ChatGPT to create a nice simple summary of that performance from the sysbench "perf" files.
+You learned how to provision an Arm-based Azure VM for MySQL migration, move a database from an on-premises x64 simulator, and evaluate performance by reading sysbench throughput and latency metrics.

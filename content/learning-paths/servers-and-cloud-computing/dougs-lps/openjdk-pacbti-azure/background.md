@@ -1,5 +1,5 @@
 ---
-title: Overview of Azure Cobalt 100, OpenJDK, and the PAC and BTI Arm v9 instructions
+title: Understand Azure Cobalt 100, OpenJDK, and Armv9 PAC/BTI
 
 weight: 2
 
@@ -14,10 +14,12 @@ To learn more, see the Microsoft blog [Announcing the preview of new Azure VMs b
 
 ## OpenJDK and the PAC/BTI Arm v9 instructions
 
-OpenJDK is the open-source reference implementation of the Java Platform, Standard Edition (Java SE). It provides the core Java compiler, runtime, and class libraries that developers use to build and run Java applications across many operating systems and hardware platforms. Originally released by Sun Microsystems and now primarily stewarded by Oracle with broad community and industry participation, OpenJDK forms the basis for most modern Java distributions. In practice, it gives organizations a common, standards-based Java foundation while allowing different vendors to package, support, and optimize their own builds.
+OpenJDK is the open-source reference implementation of Java Platform, Standard Edition (Java SE). It provides the core compiler, runtime, and class libraries you use to build and run Java applications across operating systems and hardware platforms. OpenJDK forms the basis for most modern Java distributions, while different vendors package and support their own builds.
 
 Armv9 Pointer Authentication (PAC) and Branch Target Identification (BTI) are security features designed to make control-flow attacks harder. PAC helps protect return addresses and pointers by adding a cryptographic signature that is checked before the pointer is used, which can detect tampering such as return-oriented programming attempts. BTI complements this by restricting where indirect branches are allowed to land, helping prevent attackers from jumping into unintended instruction sequences. Together, PAC and BTI strengthen software defenses at the instruction-set level, especially for modern operating systems, hypervisors, and applications that need improved resistance to memory-corruption exploits.
 
 ## What you've learned and what's next
 
-Now that you have the background on the Azure Cobalt 100 processor and the incorporation of PAC/BTI support in the OpenJDK source base, you'll create the virtual machine that will enable you to build the OpenJDK JVM with PAC/BTI support and you will be able to associate that JVM to enable it to be used in Java workloads on that VM. Doing so will provide PAC/BTI support to those Java workloads.
+You now have the background on Azure Cobalt 100, OpenJDK, and Armv9 PAC/BTI features.
+
+Next, you'll create an Arm-based Azure VM, build OpenJDK with branch protection, and validate PAC/BTI readiness in the installed JVM.

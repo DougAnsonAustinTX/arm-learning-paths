@@ -1,5 +1,5 @@
 ---
-title: Setup and prepare Jetson Thor for AWS IoT Greengrass
+title: Set up and prepare Jetson Thor for AWS IoT Greengrass
 
 weight: 4
 
@@ -8,16 +8,17 @@ layout: "learningpathall"
 
 ### Introduction
 
-In this section, lets prepare a Jetson Thor device to become an AWS IoT Greengrass client. The Jetson Thor is chosen as a suitable Arm v9 platform where PAC/BTI instruction support DOES exist (this will serve as the "positive" check platform during our PAC/BTI test)
+In this section, you prepare a Jetson Thor device as an AWS IoT Greengrass core device. Jetson Thor is an Armv9 platform with PAC/BTI support, so it serves as the positive comparison platform for this test.
 
 ### Basic OS Install
 
-Follow the instructions located in this video to install the latest NVidia Jetpack 7.1 onto your Jetson Thor device:  https://www.youtube.com/watch?v=IpiZyoqQTl8 
+To install NVIDIA JetPack 7.1 on Jetson Thor, follow this guide:
+https://www.youtube.com/watch?v=IpiZyoqQTl8
 
 
 ### Install Java
 
-Open a terminal/shell into your RPi and type:
+Open a terminal on your Jetson Thor and run:
 
 ```bash
 sudo apt update
@@ -25,7 +26,7 @@ sudo apt -y dist-upgrade
 sudo apt install -y default-jdk
 ```
 
-Confirm that java is available now:
+Confirm that Java is available:
 
 ```bash
 java --version
@@ -41,30 +42,32 @@ OpenJDK 64-Bit Server VM (build 25.0.2+10-Ubuntu-124.04, mixed mode, sharing)
 
 ### Install AWS IoT Greengrass
 
-Prior to completing these steps, you will need to create a set of AWS Credentials to use.  Please follow instructions outlined in this short video (or see your AWS administrator) to create them: https://www.youtube.com/watch?v=QzTkIfQNsVw 
+Before you complete these steps, create an AWS access key pair for the account you will use. You can follow this short video (or ask your AWS administrator):
+https://www.youtube.com/watch?v=QzTkIfQNsVw
 
-1). Open your AWS Console and go to "IoT Core" --> "Greengrass Devices" --> "Core Devices"
+1. Open the AWS Console and go to **IoT Core** -> **Greengrass devices** -> **Core devices**.
 
-2). Press "Setup core device" -> "Setup one core device"
+2. Select **Set up core device** -> **Set up one core device**.
 
-3). Give your core device a name (make it DIFFERENT that your RPi5 device!)
+3. Enter a core device name that is different from your RPi5 device.
 
-4). Select "Select an existing group". Choose "My_PAC_BTI_Test_Devices" from the dropdown
+4. Select **Select an existing group** and choose `My_PAC_BTI_Test_Devices`.
 
-5). Select to install "Greengrass Nucleus"
+5. Select **Greengrass nucleus** for installation.
 
-6). Select Linux
+6. Select **Linux**.
 
 ![Creating new AWS IoT Greengrass device](images/greengrass-1a.png "Creating an AWS IoT Greengrass device")
 
-7). Select: "Set up a device by downloading and running an installer locally on device"
+7. Select **Set up a device by downloading and running an installer locally on device**.
 
-8). Follow the instructions provided to complete setting up your greengrass device. You will use your AWS credentials created above. 
+8. Follow the generated installer instructions on the Jetson Thor and authenticate with your AWS credentials.
 
 ![Creating new AWS IoT Greengrass device](images/greengrass-2.png "Creating an AWS IoT Greengrass device")
 
-9). Confirm that your device is now registered as a Greengrass device pressing "View core devices". You should see that your device is now registered and has recorded recent activity. 
+9. Confirm registration by selecting **View core devices**.
+You should see the Jetson Thor listed with recent activity.
 
 ### What's next
 
-Your Jetson Thor is now setup as a AWS IoT Greengrass device! Next, lets create our custom AWS IoT Greengrass component that will test the availability of the PAC/BTI instructions on each of our Greengrass devices. 
+Your Jetson Thor is now set up as an AWS IoT Greengrass core device. Next, you'll create the custom component used to test PAC/BTI on both devices.

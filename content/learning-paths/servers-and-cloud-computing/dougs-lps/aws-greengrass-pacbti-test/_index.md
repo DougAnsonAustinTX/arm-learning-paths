@@ -1,5 +1,7 @@
 ---
-title: Test arm PAC/BTI instruction readiness using an AWS Greengrass custom component
+title: Test Arm PAC/BTI instruction readiness with an AWS IoT Greengrass custom component
+
+description: Learn how to deploy an AWS IoT Greengrass custom component to Arm devices and verify PAC/BTI support through MQTT-triggered tests.
 
 draft: true
 cascade:
@@ -7,12 +9,12 @@ cascade:
     
 minutes_to_complete: 30   
 
-who_is_this_for: This is an introductory topic about utilizing AWS IoT Greengrass to create and deploy a custom component that will test for PAC/BTI readiness on arm platforms.
+who_is_this_for: This Learning Path is for developers who want to use AWS IoT Greengrass to deploy a PAC/BTI test component to Arm platforms.
 
 learning_objectives: 
-    - Create a custom AWS IoT Greengrass component with the PAC/BTI testharness
-    - Install AWS IoT Greengrass onto arm v8 (i.e. RPi5) and arm v9 (i.e. Jetson Thor or similar) platforms
-    - Perform PAC/BTI checks via the custom greengrass component to confirm PAC/BTI presence and readiness
+    - Create an AWS IoT Greengrass custom component with the PAC/BTI test harness.
+    - Register an Armv8 and an Armv9 device as AWS IoT Greengrass core devices.
+    - Run PAC/BTI checks through MQTT and interpret the results for each device.
 
 prerequisites:
     - A [Amazon AWS](https://aws.amazon.com/) account with access to AWS IoT Greengrass and AWS S3
@@ -24,13 +26,15 @@ author: Varun Chari, Doug Anson
 skilllevels: Introductory
 subjects: Performance and Architecture
 cloud_service_providers:
-  - Microsoft Azure
+    - AWS
 
 armips:
     - Neoverse
 
 tools_software_languages:
+    - Python
     - Java
+    - MQTT
     - YAML
 
 operatingsystems:

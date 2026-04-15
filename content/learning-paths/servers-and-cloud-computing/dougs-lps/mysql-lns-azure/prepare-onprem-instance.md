@@ -1,5 +1,5 @@
 ---
-title: Preparing the "on-prem" instance
+title: Prepare the on-premises source instance
 
 weight: 4
 
@@ -8,11 +8,11 @@ layout: "learningpathall"
 
 ### Introduction
 
-In this section, we'll download the Terraform migration scripts/assets, setup and login with the Azure CLI on our "on-prem" x64 compute instance, and prepare the "on-prem" instance and set it up for migration.
+In this section, you'll install required tools on the on-premises x64 simulator and prepare it as the MySQL migration source.
 
 ### Install MySQL Server "on-prem"
 
-Lets update the "on-prem" instance and install mysql server as well as sysbench for some benchmarking later. In a SSH session to the "on-prem" instance, type:
+Update the on-premises instance and install MySQL server and sysbench. In an SSH session to the on-premises instance, run:
 
 ```bash
 sudo apt update
@@ -26,7 +26,7 @@ echo "source $HOME/LnS/bin/activate" >> $HOME/.bashrc
 sudo reboot
 ```
 
-Log back into the x64 "on prem" server and continue:
+Log back in to the x64 on-premises server and continue:
 
 ```bash
 sudo apt install -y mysql-server
@@ -43,7 +43,7 @@ sudo reboot
 
 ### Confirm mysql client, terraform and Azure CLI are operational
 
-Open a new SSH shell into our x64 VM and confirm the MySQL client is operating OK:
+Open a new SSH shell into your x64 VM and confirm the MySQL client is available:
 
 ```bash
 sudo mysql --version
@@ -55,7 +55,7 @@ Should see output similar to:
 mysql  Ver 8.0.45-0ubuntu0.24.04.1 for Linux on x86_64 ((Ubuntu))
 ```
 
-Confirm the terraform installation version:
+Confirm the Terraform installation version:
 
 ```bash
 terraform --version
@@ -68,7 +68,7 @@ Terraform v1.14.8
 on linux_amd64
 ```
 
-Confirming the Azure CLI installation version: 
+Confirm the Azure CLI installation version:
 
 ```bash
 az --version
@@ -106,7 +106,7 @@ With the MySQL client, enter mysql:
 sudo mysql
 ```
 
-Once at the MySQL prompt, type (assuming your chosen password is "SuperStrongPassword"):
+At the MySQL prompt, run the following commands (example password: `SuperStrongPassword`):
 
 ```mysql
 CREATE USER 'admin'@'%' IDENTIFIED BY 'SuperStrongPassword';
@@ -121,7 +121,7 @@ Now confirm that you can log into the MySQL environment with that admin user:
 mysql -u admin -p
 ```
 
-After suppling the password, you should see the mysql prompt. You can now type "quit;" to exit. 
+After you supply the password, you should see the MySQL prompt. Type `quit;` to exit.
 
 ### Install the sysbench test database as our sample DB to "migrate"
 
@@ -141,4 +141,4 @@ gunzip -c testdb.sql.gz | mysql -h localhost -u admin -p
 
 ### What we learned and what's next
 
-We have fully prepared our "on-prem" simulated X64 instance with a version of MySQL, sysbench, terraform, and the Azure CLI. Terraform and the Azure CLI will be used in the next step to "migrate" the sysbench DB we imported into our "Azure Cloud" instance that will be an Arm-based VM instance.
+You prepared the on-premises x64 simulator with MySQL, sysbench, Terraform, and Azure CLI. In the next section, you'll run the migration workflow to move `testdb` to an Arm-based Azure VM.
