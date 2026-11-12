@@ -58,10 +58,17 @@ systemctl start sshd.socket
 systemctl is-active sshd.socket
 ```
 
-
 ## Authorize the tunnel and connect
 
-In ANA, select or register your local SSH public key and choose **Authorize** for this VP. Copy the complete tunnel command that ANA generates and run it on your **local computer**. Keep that terminal open. Do not include the generated endpoint or key material in a published example.
+In ANA within your browser:
+
+        1. Select or register your local SSH public key and choose **Authorize** for this VP. 
+        2. Copy the complete tunnel command that ANA generates and run it on your **local computer**. 
+        3. In the command copied, add "-i $HOME/.ssh/PRIV_SSH_KEY_FILENAME" where 
+           PRIV_SSH_KEY_FILENAME is the name of the private key file whose public key you authorized above.
+        4. Issue the command in a local terminal. The command should continue running.
+    
+Keep that terminal open. Do not include the generated endpoint or key material in a published example.
 
 In a second **local terminal**, enter the external port from the mapping whose target port is `22`:
 
